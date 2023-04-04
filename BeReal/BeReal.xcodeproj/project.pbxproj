@@ -370,6 +370,8 @@
 				DEVELOPMENT_TEAM = QBA5C32CXN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BeReal/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"We need access to your camera to make a post\"";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"We need access to your photos to make a post\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -398,6 +400,8 @@
 				DEVELOPMENT_TEAM = QBA5C32CXN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BeReal/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "\"We need access to your camera to make a post\"";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "\"We need access to your photos to make a post\"";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
