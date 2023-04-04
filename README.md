@@ -1,24 +1,19 @@
-# Project 5 - *BeReal.*
+# Project 6 - *BeReal. Part 2*
 
 Submitted by: **Gabriel Jones**
 
-**BeReal.** is an app that takes advantage of ParseSwift and Back4App to create and authenticate users to post on the platform.  This is meant to be a BeReal. look a like although the app functions more or less the same as instagram where users can browser their feed and post pictures that contain captions.  All of this information is stored in a database hosted by Back4App. 
+**BeReal.** is an app that leverages ParseSwift and Back4App to enable user creation and authentication, and to allow posting on the platform. Its purpose is to resemble BeReal, although it operates in a manner similar to Instagram, where users can browse their feed and share photos from either the camera or camera roll, along with captions. Additionally, the app incorporates a feature that blurs posts if a user hasn't posted in the last 24 hours. All of this data is stored in a Back4App-hosted database. 
 
-Time spent: **10** hours spent in total
+Time spent: **11** hours spent in total
 
 ## Required Features
 
 The following **required** functionality is completed:
 
-- [x] User can register a new account
-- [x] User can log in with newly created account
-- [x] App has a feed of posts when user logs in
-- [x] User can upload a new post which takes in a picture from photo library and a caption	
- 
-The following **optional** features are implemented:
-
-- [x] User is able to logout
-- [x] User stays logged in when app is closed and open again	
+- [x] User can launch camera to take photo instead of photo library
+- [x] User session persists when application is closed and relaunched
+- [x] Users are able to log out and return to sign in page
+- [x] Users are NOT able to see other photos until they upload their own
 
 The following **additional** features are implemented:
 
@@ -28,17 +23,23 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-User creating a new account
+Objective #1 (Users can launch camera to take photo instead of photo library)
 
-![BeReal.](https://media.giphy.com/media/H4pC8FqUsRskPk4kdU/giphy.gif)
+![BeReal.](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMTQwNmFlZmVhMTBmYWMyMWNiNjI4OTYzOTkxNDI1ZmJkYThlYjQwYSZjdD1n/iBaMWha1x76diBawA8/giphy.gif)
 
-User logging into newly created account and making a post
+Objective #2 and #3 (User session persists when application is closed and relaunched, and users are able to log out and return to sign in page)
 
-![BeReal.](https://media.giphy.com/media/LzyVxErR89mNSivGsk/giphy.gif)
+![BeReal.](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmE4MTNlNzM0MzQ2M2U2N2NjZWE5ZGViOGUyOTMzYzYxMDNjYWY0MyZjdD1n/dwVNlyttwy4I6uPnPi/giphy.gif)
+
+Objective #4 (Users are NOT able to see other photos until they upload their own)
+
+![BeReal.](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWJlN2VkOTQyNjk1YmFlZDFiMTYzYWFkNzNmNzlmNDZkNDg2NzA0OCZjdD1n/xVqj2yGrUCEmP9Jlnk/giphy.gif)
+
+
 
 ## Notes
 
-While developing this app, I encountered a significant hurdle in creating a custom navigation bar. My goal was to maintain a black navigation bar at all times, even when the user was scrolling. However, by default, the navigation bar changed color while scrolling and also hid the logo and two buttons within it. After some research, I discovered that the solution was to create a UINavigationBarAppearance attribute and apply it to all three states of the navigation bar. In addition, I learned that the navigation bar has bar button items, which meant that the normal UIButtons that I originally created would not work placed on top of the navigation bar. I had to refactor the code to create UIBarButtonItems that would provide the same functionality as my original UIButtons.
+During my work on part two of this project, the most significant hurdle I faced was incorporating the blur view. Initially, I believed that I needed to include the effect in the prepareForReuse function. However, I later discovered that it was only necessary to add it to the setupUI function, and upon testing, it functioned correctly.
 
 ## License
 
