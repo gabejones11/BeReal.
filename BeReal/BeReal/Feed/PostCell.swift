@@ -37,6 +37,11 @@ class PostCell: UITableViewCell {
         return image
     }()
     
+    let blurView: UIVisualEffectView = {
+        let blurView = UIVisualEffectView()
+        return blurView
+    }()
+    
     private var imageDataRequest: DataRequest?
     
     //MARK: - Initialization
@@ -56,11 +61,13 @@ class PostCell: UITableViewCell {
         contentView.addSubview(postImageView)
         contentView.addSubview(captionLabel)
         contentView.addSubview(dateLabel)
+        contentView.addSubview(blurView)
         
         userNameLabel.translatesAutoresizingMaskIntoConstraints = false
         postImageView.translatesAutoresizingMaskIntoConstraints = false
         captionLabel.translatesAutoresizingMaskIntoConstraints = false
         dateLabel.translatesAutoresizingMaskIntoConstraints = false
+        blurView.translatesAutoresizingMaskIntoConstraints = false
         
         let screenWidth = UIScreen.main.bounds.width
         
@@ -69,7 +76,7 @@ class PostCell: UITableViewCell {
             userNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             
             postImageView.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 5),
-            postImageView.heightAnchor.constraint(equalToConstant: screenWidth * 1.3),
+            postImageView.heightAnchor.constraint(equalToConstant: screenWidth),
             postImageView.widthAnchor.constraint(equalToConstant: screenWidth),
             
             captionLabel.topAnchor.constraint(equalTo: postImageView.bottomAnchor, constant: 5),
@@ -77,7 +84,12 @@ class PostCell: UITableViewCell {
             
             dateLabel.topAnchor.constraint(equalTo: captionLabel.bottomAnchor, constant: 5),
             dateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            blurView.topAnchor.constraint(equalTo: postImageView.topAnchor),
+            blurView.bottomAnchor.constraint(equalTo: postImageView.bottomAnchor),
+            blurView.trailingAnchor.constraint(equalTo: postImageView.trailingAnchor),
+            blurView.leadingAnchor.constraint(equalTo: postImageView.leadingAnchor)
         ])
         
     }
@@ -91,6 +103,7 @@ class PostCell: UITableViewCell {
         
         //cancel image request
         imageDataRequest?.cancel()
+        
     }
     
     func configure(with post: Post){
@@ -124,6 +137,28 @@ class PostCell: UITableViewCell {
         //date
         if let date = post.createdAt {
             dateLabel.text = DateFormatter.postFormatter.string(from: date)
+        }
+        
+        // A lot of the following returns optional values so we'll unwrap them all together in one big `if let`
+        // Get the current user.
+        if let currentUser = User.current,
+
+            // Get the date the user last shared a post (cast to Date).
+           let lastPostedDate = currentUser.lastPostedDate,
+
+            // Get the date the given post was created.
+           let postCreatedDate = post.createdAt,
+
+            // Get the difference in hours between when the given post was created and the current user last posted.
+           let diffHours = Calendar.current.dateComponents([.hour], from: postCreatedDate, to: lastPostedDate).hour {
+
+            // Hide the blur view if the given post was created within 24 hours of the current user's last post. (before or after)
+            blurView.isHidden = abs(diffHours) < 24
+        } else {
+
+            // Default to blur if we can't get or compute the date's above for some reason.
+            blurView.isHidden = false
+            blurView.effect = UIBlurEffect(style: .regular)
         }
     }
 

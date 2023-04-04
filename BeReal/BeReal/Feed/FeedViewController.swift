@@ -95,9 +95,14 @@ class FeedViewController: UIViewController {
         //create a query to fetch posts
         //any properties that are parse objects are stored by reference -> 'include_:'
         //sort the posts be descending order based on created date
+        // Get the date for yesterday. Adding (-1) day is equivalent to subtracting a day.
+        // NOTE: `Date()` is the date and time of "right now".
+        let yesterdayDate = Calendar.current.date(byAdding: .day, value: (-1), to: Date())!
         let query = Post.query()
             .include("user")
             .order([.descending("createdAt")])
+            .where("createdAt" >= yesterdayDate) // <- Only include results created yesterday onwards
+            .limit(10) // <- Limit max number of returned posts to 10
         
         //fetch posts defined in query
         query.find { [weak self] result in
